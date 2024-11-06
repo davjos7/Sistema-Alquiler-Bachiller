@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cuarto;
+use App\Models\Huesped;
 
-class CuartosController extends Controller
+class HuespedesController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $cuartos = Cuarto::all();
-        return view('cuartos.list', compact('cuartos'));
+        $huespedes = Huesped::all();
+        return view('huespedes.list', compact('huespedes'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CuartosController extends Controller
      */
     public function store(Request $request)
     {
-        Cuarto::create($request->all());
+        Huesped::create($request->all());
         return redirect()->back()->with('success', 'Se registro correctamente');
     }
 
@@ -44,19 +44,19 @@ class CuartosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id_cuarto)
+    public function edit(string $id_huesped)
     {
-        $cuarto= Cuarto::findOrFail($id_cuarto);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id_cuarto)
+    public function update(Request $request, string $id_huesped)
     {
-        $cuarto= Cuarto::findOrFail($id_cuarto);
-        $cuarto->update($request->all());
-        return redirect()->route('cuartos.index')->with('successEdit', 'Se actulizo correctamente');
+        $huesped = Huesped::findOrFail($id_huesped);
+        $huesped->update($request->all());
+        return redirect()->route('huespedes.index')->with('successEdit', 'Se actulizo correctamente');
     }
 
     /**
@@ -64,8 +64,8 @@ class CuartosController extends Controller
      */
     public function destroy(string $id)
     {
-        $cuarto = Cuarto::findOrFail($id);
-        $cuarto->delete();
-        return redirect()->route('cuartos.index')->with('successDelete', 'Se elimino correctamente');
+        $huesped = Huesped::findOrFail($id);
+        $huesped->delete();
+        return redirect()->route('huespedes.index')->with('successDelete', 'Se elimino correctamente');
     }
 }

@@ -5,7 +5,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Cuartos</title>
+    <title>Huespedes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -41,7 +41,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Listado de Cuartos</h4>
+                            <h4 class="card-title mb-0">Listado de Huespedes</h4>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -67,35 +67,33 @@
                                         <thead>
                                           <tr>
                                             <th scope="col">Id</th>
-                                            <th scope="col">Nombre del Cuarto</th>
-                                            <th scope="col">Descripcion del Cuarto</th>
-                                            <th scope="col">Precio del Cuarto</th>
-                                            <th scope="col">Disponibilidad</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Apellidos</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">Edad</th>
+                                            <th scope="col">Dni</th>
+                                            <th scope="col">Garantia</th>
                                             <th scope="col">Acciones</th>
                                           </tr>
                                         </thead>
                                         <tbody>
-                                    @foreach ($cuartos as $cuarto)
+                                    @foreach ($huespedes as $huesped)
                                           <tr>
-                                            <th scope="row">{{ $cuarto->id_cuarto }}</th>
-                                            <td>{{ $cuarto->nombre_cuarto }}</td>
-                                            <td>{{ $cuarto->descripcion_cuarto }}</td>
-                                            <td>S/. {{ $cuarto->precio_cuarto }}</td>
-                                            <td>
-                                                <span class="badge text-uppercase
-                                                             {{ $cuarto->disponible_cuarto == 1 ? 'bg-success-subtle text-success' : 'bg-danger-subtle text-danger' }}"
-                                                      data-status="{{ $cuarto->disponible_cuarto }}">
-                                                    {{ $cuarto->disponible_cuarto == 1 ? 'Disponible' : 'No Disponible' }}
-                                                </span>
-                                            </td>
+                                            <th scope="row">{{ $huesped->id_huesped }}</th>
+                                            <td>{{ $huesped->nombres }}</td>
+                                            <td>{{ $huesped->apellidos }}</td>
+                                            <td>{{ $huesped->telefono }}</td>
+                                            <td>{{ $huesped->edad }}</td>
+                                            <td>{{ $huesped->dni }}</td>
+                                            <td>{{ $huesped->garantia }}</td>
 
                                             <td>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#EditarModal{{ $cuarto->id_cuarto }}" class="btn btn-success">
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#EditarModal{{ $huesped->id_huesped }}" class="btn btn-success">
                                                     Editar
                                                 </button>
                                             </td>
                                             <td>
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteRecordModal{{ $cuarto->id_cuarto }}" class="btn btn-danger">
+                                                <button type="button" data-bs-toggle="modal" data-bs-target="#deleteRecordModal{{ $huesped->id_huesped }}" class="btn btn-danger">
                                                     Eliminar
                                                 </button>
                                             </td>
@@ -134,15 +132,15 @@
             </div>
             <!-- end row -->
 
-            {{-- MODAL DE AGREGAR CUARTOS --}}
+            {{-- MODAL DE AGREGAR HUESPED --}}
             <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="exampleModalLabel">Agregar Cuarto</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Agregar Huesped</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                         </div>
-                        <form  action="{{route('cuartos.store')}}" method="post">
+                        <form  action="{{route('huespedes.store')}}" method="post">
                             @csrf
                             <div class="modal-body">
                                 <div class="mb-3" id="modal-id" style="display: none;">
@@ -151,32 +149,40 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="customername-field" class="form-label">Nombre</label>
-                                    <input type="text" id="customername-field" class="form-control" name="nombre_cuarto" placeholder="Ingrese un nombre" required />
+                                    <label for="customername-field" class="form-label">Nombres</label>
+                                    <input type="text" id="customername-field" class="form-control" name="nombres" placeholder="Ingrese un nombre" required />
                                     <div class="invalid-feedback">Por favor ingrese un nombre</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email-field" class="form-label">Descripcion</label>
-                                    <input type="text" name="descripcion_cuarto" id="email-field" class="form-control" placeholder="Ingrese una descripcion" required />
+                                    <label for="email-field" class="form-label">Apellidos</label>
+                                    <input type="text" name="apellidos" id="email-field" class="form-control" placeholder="Ingrese una descripcion" required />
                                     <div class="invalid-feedback">Please enter an email.</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="phone-field" class="form-label">Precio</label>
-                                    <input min="0" max="3000" type="number" id="phone-field" name="precio_cuarto" class="form-control" placeholder="Ingrese un precio" required />
+                                    <label for="phone-field" class="form-label">Telefono</label>
+                                    <input min="0" max="999999999" type="number" id="phone-field" name="telefono" class="form-control" placeholder="Ingrese un precio" required />
                                     <div class="invalid-feedback">Please enter a phone.</div>
                                 </div>
 
-                                <div>
-                                    <label for="status-field" class="form-label">Estado</label>
-                                    <select class="form-control" name="disponible_cuarto" id="status-field" required>
-                                        <option value="">Estado</option>
-                                        <option value="1">Disponible</option>
-                                        <option value="0">No Disponible</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Edad</label>
+                                    <input min="0" max="200" type="number" id="phone-field" name="edad" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Dni</label>
+                                    <input min="0" max="9999999999" type="number" id="phone-field" name="dni" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Garantia</label>
+                                    <input min="0" max="3000" type="number" id="phone-field" name="garantia" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
@@ -193,16 +199,16 @@
 
 
 
-             {{-- MODAL DE Editar CUARTOS --}}
-            @foreach($cuartos as $cuarto)
-             <div class="modal fade" id="EditarModal{{ $cuarto->id_cuarto }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+             {{-- MODAL DE Editar HUESPEDES --}}
+            @foreach($huespedes as $huesped)
+             <div class="modal fade" id="EditarModal{{ $huesped->id_huesped }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header bg-light p-3">
-                            <h5 class="modal-title" id="exampleModalLabel">Editar Cuarto</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Editar huesped</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                         </div>
-                        <form action="{{route('cuartos.update', $cuarto->id_cuarto)}}" method="post"">
+                        <form action="{{route('huespedes.update', $huesped->id_huesped)}}" method="post"">
                             @csrf
                             @method('PUT')
                             <div class="modal-body">
@@ -212,33 +218,40 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="customername-field" class="form-label">Nombre</label>
-                                    <input type="text" id="customername-field" value="{{ $cuarto->nombre_cuarto }}" class="form-control" name="nombre_cuarto" placeholder="Ingrese un nombre" required />
+                                    <label for="customername-field" class="form-label">Nombres</label>
+                                    <input type="text" value="{{ $huesped->nombres }}" id="customername-field" class="form-control" name="nombres" placeholder="Ingrese un nombre" required />
                                     <div class="invalid-feedback">Por favor ingrese un nombre</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="email-field" class="form-label">Descripcion</label>
-                                    <input type="text" name="descripcion_cuarto" value="{{ $cuarto->descripcion_cuarto }}" id="email-field" class="form-control" placeholder="Ingrese una descripcion" required />
+                                    <label for="email-field" class="form-label">Apellidos</label>
+                                    <input type="text" value="{{ $huesped->apellidos }}" name="apellidos" id="email-field" class="form-control" placeholder="Ingrese una descripcion" required />
                                     <div class="invalid-feedback">Please enter an email.</div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="phone-field" class="form-label">Precio</label>
-                                    <input min="0" max="3000" type="number" value="{{ $cuarto->precio_cuarto }}" id="phone-field" name="precio_cuarto" class="form-control" placeholder="Ingrese un precio" required />
+                                    <label for="phone-field" class="form-label">Telefono</label>
+                                    <input min="0" max="999999999" type="number" value="{{ $huesped->telefono }}" id="phone-field" name="telefono" class="form-control" placeholder="Ingrese un precio" required />
                                     <div class="invalid-feedback">Please enter a phone.</div>
                                 </div>
 
-                                <div>
-                                    <label for="status-field" class="form-label">Estado</label>
-                                    <select class="form-control" name="disponible_cuarto" id="status-field" required>
-                                        <option value="">Estado</option>
-                                        <option value="1" {{ $cuarto->disponible_cuarto == 1 ? 'selected' : '' }}>Disponible</option>
-                                        <option value="0" {{ $cuarto->disponible_cuarto == 0 ? 'selected' : '' }}>No Disponible</option>
-                                    </select>
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Edad</label>
+                                    <input min="0" max="200" type="number" value="{{ $huesped->edad }}" id="phone-field" name="edad" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
                                 </div>
 
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Dni</label>
+                                    <input min="0" max="9999999999" type="number" value="{{ $huesped->dni }}" id="phone-field" name="dni" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
+                                </div>
 
+                                <div class="mb-3">
+                                    <label for="phone-field" class="form-label">Garantia</label>
+                                    <input min="0" max="3000" type="number" value="{{ $huesped->garantia }}" id="phone-field" name="garantia" class="form-control" placeholder="Ingrese un precio" required />
+                                    <div class="invalid-feedback">Please enter a phone.</div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <div class="hstack gap-2 justify-content-end">
@@ -252,12 +265,12 @@
                 </div>
             </div>
             @endforeach
-            {{-- FIN MODAL DE Editar CUARTOS --}}
+            {{-- FIN MODAL DE Editar HUESPEDES --}}
 
 
             {{-- MODAL DE ELIMINAR CUARTOS --}}
-            @foreach($cuartos as $cuarto)
-            <div class="modal fade zoomIn" id="deleteRecordModal{{ $cuarto->id_cuarto }}" tabindex="-1" aria-hidden="true">
+            @foreach($huespedes as $huesped)
+            <div class="modal fade zoomIn" id="deleteRecordModal{{ $huesped->id_huesped }}" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -273,8 +286,8 @@
                             </div>
                             <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                 <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                                <!-- Formulario de eliminación específico para cada cuarto -->
-                                <form action="{{ route('cuartos.destroy', $cuarto->id_cuarto) }}" method="POST">
+                                <!-- Formulario de eliminación específico para cada huesped -->
+                                <form action="{{ route('huespedes.destroy', $huesped->id_huesped) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn w-sm btn-danger" id="delete-record">Si, borralo!</button>
@@ -317,18 +330,18 @@
     <script src="{{ asset('assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <!-- prismjs plugin -->
-    {{-- <script src="assets/libs/prismjs/prism.js"></script>
-    <script src="assets/libs/list.js/list.min.js"></script>
-    <script src="assets/libs/list.pagination.js/list.pagination.min.js"></script>
+    {{-- <script src="{{ asset('assets/libs/prismjs/prism.js') }}"></script>
+    <script src="{{ asset('assets/libs/list.js/list.min.js') }}"></script>
+    <script src="{{ asset('assets/libs/list.pagination.js/list.pagination.min.js') }}"></script> --}}
 
     <!-- listjs init -->
-    <script src="assets/js/pages/listjs.init.js"></script>
+    {{-- <script src="{{ asset('assets/js/pages/listjs.init.js') }}"></script>
 
     <!-- Sweet Alerts js -->
-    <script src="assets/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
     <!-- App js -->
-    <script src="assets/js/app.js"></script> --}}
+    <script src="{{ asset('assets/js/app.js') }}"></script> --}}
 
 
 

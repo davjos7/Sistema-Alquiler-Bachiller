@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CuartosController;
+use App\Http\Controllers\HuespedesController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,3 +35,4 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::resource('cuartos', CuartosController::class);
+Route::resource('huespedes', HuespedesController::class);
