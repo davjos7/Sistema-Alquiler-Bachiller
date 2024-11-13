@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CuartosController;
 use App\Http\Controllers\HuespedesController;
+use App\Http\Controllers\ReservasController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -36,3 +37,4 @@ require __DIR__.'/auth.php';
 
 Route::resource('cuartos', CuartosController::class);
 Route::resource('huespedes', HuespedesController::class);
+Route::resource('reservas', ReservasController::class);
